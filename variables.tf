@@ -1,31 +1,32 @@
-variable "aws_access_key_id" {
-  description = "AWS Access key"
-  type        = string
-  sensitive   = true
-}
+# variable "aws_access_key_id" {
+#   description = "AWS Access key"
+#   type        = string
+#   sensitive   = true
+# }
 
-variable "aws_secret_access_key" {
-  description = "AWS Secret key"
-  type        = string
-  sensitive   = true
-}
+# variable "aws_secret_access_key" {
+#   description = "AWS Secret key"
+#   type        = string
+#   sensitive   = true
+# }
 
-variable "aws_session_token" {
-  description = "AWS Session token"
+# variable "aws_session_token" {
+#   description = "AWS Session token"
+#   type        = string
+#   sensitive   = true
+# }
+
+variable "node_role_arn" {
+  description = "ARN of the IAM Role that will be associated with the Node Group"
   type        = string
   sensitive   = true
+  default     = "arn:aws:iam::194162463451:role/LabRole"
 }
 
 variable "aws_region" {
   description = "AWS region"
   type        = string
   default     = "us-east-1"
-}
-
-variable "node_role_arn" {
-  description = "ARN of the IAM Role that will be associated with the Node Group"
-  type        = string
-  sensitive   = true
 }
 
 variable "availability_zones" {
@@ -37,13 +38,7 @@ variable "availability_zones" {
 variable "cluster_name" {
   description = "Name of the EKS Cluster"
   type        = string
-  default     = "techchallenge-cluster"
-}
-
-variable "node_group_name" {
-  description = "Name of Node Group"
-  type        = string
-  default     = "techchallenge_node_group"
+  default     = "techchallenge"
 }
 
 variable "instance_type" {
@@ -53,7 +48,7 @@ variable "instance_type" {
 }
 
 variable "ami_type" {
-  description = "ami used on EC2"
+  description = "AMI used on EC2"
   type        = string
   default     = "AL2_x86_64"
 }
