@@ -1,3 +1,21 @@
+variable "aws_access_key" {
+  description = "AWS Access key"
+  type        = string
+  sensitive   = true
+}
+
+variable "aws_secret_key" {
+  description = "AWS Secret key"
+  type        = string
+  sensitive   = true
+}
+
+variable "aws_session_token" {
+  description = "AWS Session token"
+  type        = string
+  sensitive   = true
+}
+
 variable "aws_region" {
   description = "AWS region"
   type        = string
