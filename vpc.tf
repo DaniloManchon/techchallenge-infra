@@ -4,7 +4,7 @@ resource "aws_vpc" "techchallenge_vpc" {
   instance_tenancy = "default"
 
   tags = {
-    Name = "techchallenge_vpc"
+    Name = "${var.cluster_name}-vpc"
   }
 
   lifecycle {
@@ -12,7 +12,7 @@ resource "aws_vpc" "techchallenge_vpc" {
   }
 }
 
-# Public Subnet - 1
+# Public Subnets
 resource "aws_subnet" "techchallenge_public_subnet_1" {
   vpc_id            = aws_vpc.techchallenge_vpc.id
   cidr_block        = "10.0.1.0/24"
@@ -21,7 +21,8 @@ resource "aws_subnet" "techchallenge_public_subnet_1" {
   # map_public_ip_on_launch = true # Prevent errors due to destroy process
 
   tags = {
-    Name = "techchallenge_public_subnet_1"
+    Name = "${var.cluster_name}-public_subnet_1"
+    Tier = "Public"
   }
 
   lifecycle {
@@ -29,25 +30,26 @@ resource "aws_subnet" "techchallenge_public_subnet_1" {
   }
 }
 
-# Public Subnet - 2
 resource "aws_subnet" "techchallenge_public_subnet_2" {
   vpc_id            = aws_vpc.techchallenge_vpc.id
   cidr_block        = "10.0.2.0/24"
   availability_zone = var.availability_zones[1]
 
   tags = {
-    Name = "techchallenge_public_subnet_2"
+    Name = "${var.cluster_name}-public_subnet_2"
+    Tier = "Public"
   }
 }
 
-# Private Subnet - 1
+# Private Subnets
 resource "aws_subnet" "techchallenge_private_subnet_1" {
   vpc_id            = aws_vpc.techchallenge_vpc.id
   cidr_block        = "10.0.3.0/24"
   availability_zone = var.availability_zones[0]
 
   tags = {
-    Name = "techchallenge_private_subnet_1"
+    Name = "${var.cluster_name}-private_subnet_1"
+    Tier = "Private"
   }
 
   lifecycle {
@@ -55,14 +57,14 @@ resource "aws_subnet" "techchallenge_private_subnet_1" {
   }
 }
 
-# Private Subnet - 2
 resource "aws_subnet" "techchallenge_private_subnet_2" {
   vpc_id            = aws_vpc.techchallenge_vpc.id
   cidr_block        = "10.0.4.0/24"
   availability_zone = var.availability_zones[1]
 
   tags = {
-    Name = "techchallenge_private_subnet_2"
+    Name = "${var.cluster_name}-private_subnet_2"
+    Tier = "Private"
   }
 
   lifecycle {
@@ -75,7 +77,7 @@ resource "aws_internet_gateway" "techchallenge_igw" {
   vpc_id = aws_vpc.techchallenge_vpc.id
 
   tags = {
-    Name = "techchallenge_igw"
+    Name = "${var.cluster_name}-igw"
   }
 }
 
@@ -89,7 +91,7 @@ resource "aws_route_table" "techchallenge_public_rt" {
   }
 
   tags = {
-    Name = "techchallenge_public_rt"
+    Name = "${var.cluster_name}-public_rt"
   }
 }
 
@@ -115,7 +117,7 @@ resource "aws_route_table" "techchallenge_private_rt" {
   }
 
   tags = {
-    Name = "techchallenge_private_rt"
+    Name = "${var.cluster_name}-private_rt"
   }
 }
 
@@ -142,6 +144,6 @@ resource "aws_nat_gateway" "techchallenge_nat_gw" {
   subnet_id     = aws_subnet.techchallenge_public_subnet_1.id
 
   tags = {
-    Name = "techchallenge_nat_gw"
+    Name = "${var.cluster_name}-nat_gw"
   }
 }
