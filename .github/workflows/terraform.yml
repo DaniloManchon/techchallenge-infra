@@ -26,11 +26,12 @@ jobs:
         aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
         aws_session_token: ${{ secrets.AWS_SESSION_TOKEN }}
         node_role_arn: ${{ secrets.NODE_ROLE_ARN }}
-      run: terraform plan \ 
-           -var="aws_access_key=${{ secrets.AWS_ACCESS_KEY }}" \
-           -var="aws_secret_key=${{ secrets.AWS_SECRET_KEY }}" \
-           -var="aws_session_token=${{ secrets.AWS_SESSION_TOKEN }}" \
-           -var="node_role_arn=${{ secrets.NODE_ROLE_ARN }}"
+      run: | 
+        terraform plan \ 
+        -var="aws_access_key=${{ secrets.AWS_ACCESS_KEY }}" \
+        -var="aws_secret_key=${{ secrets.AWS_SECRET_KEY }}" \
+        -var="aws_session_token=${{ secrets.AWS_SESSION_TOKEN }}" \
+        -var="node_role_arn=${{ secrets.NODE_ROLE_ARN }}"
 
     - name: Terraform Apply
       if: github.ref == 'refs/heads/main'
@@ -39,8 +40,9 @@ jobs:
         aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
         aws_session_token: ${{ secrets.AWS_SESSION_TOKEN }}}
         node_role_arn: ${{ secrets.NODE_ROLE_ARN }}
-      run: terraform apply -auto-approve \
-           -var="aws_access_key=${{ secrets.AWS_ACCESS_KEY }}" \
-           -var="aws_secret_key=${{ secrets.AWS_SECRET_KEY }}" \
-           -var="aws_session_token=${{ secrets.AWS_SESSION_TOKEN }}" \
-           -var="node_role_arn=${{ secrets.NODE_ROLE_ARN }}"
+      run: |
+        terraform apply -auto-approve \
+        -var="aws_access_key=${{ secrets.AWS_ACCESS_KEY }}" \
+        -var="aws_secret_key=${{ secrets.AWS_SECRET_KEY }}" \
+        -var="aws_session_token=${{ secrets.AWS_SESSION_TOKEN }}" \
+        -var="node_role_arn=${{ secrets.NODE_ROLE_ARN }}"
