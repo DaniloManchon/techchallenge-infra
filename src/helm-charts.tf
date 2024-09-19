@@ -15,11 +15,12 @@ resource "helm_release" "metrics_server" {
 }
 
 resource "helm_release" "mongodb" {
-  name       = "mongodb"
-  repository = "https://charts.bitnami.com/bitnami"
-  chart      = "mongodb"
-  namespace  = "mongodb"
-  version    = "15.6.24"
+  name             = "mongodb"
+  repository       = "https://charts.bitnami.com/bitnami"
+  chart            = "mongodb"
+  namespace        = "mongodb"
+  create_namespace = true
+  version          = "15.6.24"
 
   values = ["${file("${path.module}/helm/values-mongo.yaml")}"]
 }
