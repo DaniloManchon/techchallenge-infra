@@ -18,8 +18,7 @@ resource "aws_lb" "techchallenge_lb" {
   depends_on = [
     aws_vpc.techchallenge_vpc,
     aws_security_group.eks_security_group,
-    aws_naws_nat_gateway.techchallenge_nat_gw
-
+    aws_nat_gateway.techchallenge_nat_gw
   ]
 }
 
