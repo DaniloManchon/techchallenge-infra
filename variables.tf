@@ -1,20 +1,20 @@
-# variable "aws_access_key_id" {
-#   description = "AWS Access key"
-#   type        = string
-#   sensitive   = true
-# }
+variable "aws_access_key_id" {
+  description = "AWS Access key"
+  type        = string
+  sensitive   = true
+}
 
-# variable "aws_secret_access_key" {
-#   description = "AWS Secret key"
-#   type        = string
-#   sensitive   = true
-# }
+variable "aws_secret_access_key" {
+  description = "AWS Secret key"
+  type        = string
+  sensitive   = true
+}
 
-# variable "aws_session_token" {
-#   description = "AWS Session token"
-#   type        = string
-#   sensitive   = true
-# }
+variable "aws_session_token" {
+  description = "AWS Session token"
+  type        = string
+  sensitive   = true
+}
 
 variable "node_role_arn" {
   description = "ARN of the IAM Role that will be associated with the Node Group"

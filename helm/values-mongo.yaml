@@ -1,0 +1,4 @@
+common:
+    storageClass: gp2
+global:
+    storageClass: gp2
