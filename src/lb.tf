@@ -15,6 +15,9 @@ resource "aws_lb" "techchallenge_lb" {
   subnets            = data.aws_subnets.public_subnets.ids
 
   enable_cross_zone_load_balancing = true
+  depends_on = [
+    aws_vpc.techchallenge_vpc.id
+  ]
 }
 
 resource "aws_api_gateway_vpc_link" "techchallenge_vpc_link" {
