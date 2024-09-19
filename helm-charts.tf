@@ -21,5 +21,5 @@ resource "helm_release" "mongodb" {
   namespace  = "mongodb"
   version    = "15.6.24"
 
-  values = ["${file("${path.module}/helm/values-mongo.yml")}"]
+  values = ["${file("${path.module}/helm/values-mongo.yaml")}"]
 }
