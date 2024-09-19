@@ -16,7 +16,10 @@ resource "aws_lb" "techchallenge_lb" {
 
   enable_cross_zone_load_balancing = true
   depends_on = [
-    aws_vpc.techchallenge_vpc
+    aws_vpc.techchallenge_vpc,
+    aws_security_group.eks_security_group,
+    aws_subnet.techchallenge_public_subnet_1,
+    aws_subnet.techchallenge_public_subnet_2
   ]
 }
 
