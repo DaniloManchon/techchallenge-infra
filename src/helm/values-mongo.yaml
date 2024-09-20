@@ -4,5 +4,4 @@ global:
     storageClass: gp2
 
 auth:
-    usernames: ["techchallenge"]
-    passwords: ["password"]
+    rootPassword: "password"
