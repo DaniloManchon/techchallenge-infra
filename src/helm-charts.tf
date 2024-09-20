@@ -21,6 +21,6 @@ resource "helm_release" "mongodb" {
   namespace        = "mongodb"
   create_namespace = true
   version          = "15.6.24"
-
-  values = ["${file("${path.module}/helm/values-mongo.yaml")}"]
+  force_update     = true
+  values           = ["${file("${path.module}/helm/values-mongo.yaml")}"]
 }
