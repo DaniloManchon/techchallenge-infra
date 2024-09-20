@@ -2,3 +2,7 @@ common:
     storageClass: gp2
 global:
     storageClass: gp2
+
+auth:
+    usernames: ["techchallenge"]
+    passwords: ["password"]
