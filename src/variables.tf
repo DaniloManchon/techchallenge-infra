@@ -26,7 +26,7 @@ variable "cluster_name" {
 variable "instance_type" {
   description = "EC2 instance type"
   type        = string
-  default     = "t2.small"
+  default     = "t2.medium"
 }
 
 variable "ami_type" {
