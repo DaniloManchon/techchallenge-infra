@@ -36,7 +36,18 @@ resource "aws_security_group" "eks_security_group" {
 }
 
 #VPC Link
-resource "aws_api_gateway_vpc_link" "techchallenge_vpc_link" {
-  name        = "${var.cluster_name}-vpc-link"
-  target_arns = [aws_lb.techchallenge_lb.arn]
+# resource "aws_api_gateway_vpc_link" "techchallenge_vpc_link" {
+#   name        = "${var.cluster_name}-vpc-link"
+#   target_arns = [aws_lb.techchallenge_lb.arn]
+
+# }
+
+resource "aws_apigatewayv2_vpc_link" "techchallenge_vpc_link" {
+  name               = "${var.cluster_name}-vpc-link"
+  security_group_ids = aws_security_group.eks_security_group.id
+  subnet_ids = [
+    aws_subnet.techchallenge_private_subnet_1,
+    aws_subnet.techchallenge_private_subnet_2
+  ]
+
 }

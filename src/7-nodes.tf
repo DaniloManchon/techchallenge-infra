@@ -3,7 +3,10 @@ resource "aws_eks_node_group" "techchallenge_node_group" {
   cluster_name    = aws_eks_cluster.techchallenge_cluster.name
   node_group_name = "${var.cluster_name}-ng"
   node_role_arn   = aws_eks_cluster.techchallenge_cluster.role_arn
-  subnet_ids      = [aws_subnet.techchallenge_private_subnet_1.id, aws_subnet.techchallenge_private_subnet_2.id]
+  subnet_ids = [
+    aws_subnet.techchallenge_private_subnet_1.id,
+    aws_subnet.techchallenge_private_subnet_2.id
+  ]
 
   scaling_config {
     desired_size = 2
