@@ -36,30 +36,21 @@ resource "aws_security_group" "eks_security_group" {
 }
 
 #VPC Link
-# resource "aws_api_gateway_vpc_link" "techchallenge_vpc_link" {
-#   name        = "${var.cluster_name}-vpc-link"
-#   target_arns = [aws_lb.techchallenge_lb.arn]
+resource "aws_api_gateway_vpc_link" "techchallenge_vpc_link" {
+  name        = "${var.cluster_name}-vpc-link"
+  target_arns = [aws_lb.techchallenge_lb.arn]
 
-# }
-
-data "aws_subnets" "private_subnets" {
-  filter {
-    name   = "vpc-id"
-    values = [var.vpc_id]
-  }
 }
 
-data "aws_subnet" "private_subnets_list" {
-  for_each = toset(data.aws_subnets.example.ids)
-  id       = each.value
-}
-
-resource "aws_apigatewayv2_vpc_link" "techchallenge_vpc_link" {
-  name               = "${var.cluster_name}-vpc-link"
-  security_group_ids = aws_security_group.eks_security_group.id
-  subnet_ids = data.aws_subnets.private_subnets_list.ids
-  depends_on = [ 
-    aws_subnet.techchallenge_private_subnet_1,
-    aws_subnet.techchallenge_private_subnet_2
- ]
+#VPC Endpoint
+resource "aws_vpc_endpoint" "techchallenge_vpc_endpoint" {
+  private_dns_enabled = false
+  security_group_ids  = [aws_security_group.eks_security_group.id]
+  service_name        = "com.amazonaws.${data.aws_region.current.name}.execute-api"
+  subnet_ids          = [
+    aws_subnet.techchallenge_private_subnet_1.id,
+    aws_subnet.techchallenge_private_subnet_2.id
+  ]
+  vpc_endpoint_type   = "Interface"
+  vpc_id              = aws_vpc.techchallenge_vpc.id
 }
