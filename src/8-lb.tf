@@ -1,3 +1,4 @@
+# Network LoadBalancer
 resource "aws_lb" "techchallenge_lb" {
   name               = "${var.cluster_name}-lb"
   load_balancer_type = "network"
