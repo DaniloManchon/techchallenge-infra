@@ -1,9 +1,10 @@
-#API Gateway
+# API Gateway
 resource "aws_apigatewayv2_api" "techchallenge" {
   name          = "techchallenge"
   protocol_type = "HTTP"
 }
 
+# API Gateway Stage
 resource "aws_apigatewayv2_stage" "techchallenge_stage" {
   api_id      = aws_apigatewayv2_api.techchallenge.id
   name        = "main"
@@ -13,7 +14,7 @@ resource "aws_apigatewayv2_stage" "techchallenge_stage" {
 resource "aws_apigatewayv2_integration" "techchallenge_integration" {
   api_id = aws_apigatewayv2_api.techchallenge.id
 
-  integration_uri    = "arn:aws:elasticloadbalancing:us-east-1:<acc-id>:listener/net/a852b4f6ff0be41dfa1505018b083488/e8cf16c1a71e2a37/59bf9fd068f3f993"
+  integration_uri    = aws_lb.techchallenge_lb.arn
   integration_type   = "HTTP_PROXY"
   integration_method = "ANY"
   connection_type    = "VPC_LINK"
