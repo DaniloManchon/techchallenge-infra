@@ -20,6 +20,8 @@ resource "helm_release" "ingress" {
   chart            = "ingress-nginx"
   namespace        = "ingress-nginx"
   create_namespace = true
+
+  values = ["${file("${path.module}/helm/values-nginx.yaml")}"]
 }
 
 resource "helm_release" "mongodb" {
