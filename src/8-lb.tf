@@ -9,8 +9,3 @@ resource "aws_lb" "techchallenge_lb" {
   enable_cross_zone_load_balancing = true
 
 }
-
-resource "aws_api_gateway_vpc_link" "techchallenge_vpc_link" {
-  name        = "${var.cluster_name}-vpc-link"
-  target_arns = [aws_lb.techchallenge_lb.arn]
-}
