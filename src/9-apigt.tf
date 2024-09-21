@@ -17,5 +17,5 @@ resource "aws_apigatewayv2_integration" "techchallenge_integration" {
   integration_type   = "HTTP_PROXY"
   integration_method = "ANY"
   connection_type    = "VPC_LINK"
-  connection_id      = aws_apigatewayv2_vpc_link.techchallenge_integration.id
+  connection_id      = aws_api_gateway_vpc_link.techchallenge_vpc_link.id
 }
