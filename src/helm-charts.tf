@@ -14,6 +14,15 @@ resource "helm_release" "metrics_server" {
   version    = "3.12.1"
 }
 
+resource "helm_release" "ingress" {
+  name             = "ingress-nginx"
+  repository       = "https://kubernetes.github.io/ingress-nginx"
+  chart            = "ingress-nginx"
+  namespace        = "ingress-nginx"
+  create_namespace = true
+  version          = "v1.11.2"
+}
+
 resource "helm_release" "mongodb" {
   name             = "mongodb"
   repository       = "https://charts.bitnami.com/bitnami"
