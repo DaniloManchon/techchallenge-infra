@@ -9,4 +9,3 @@ resource "aws_lb" "techchallenge_lb" {
   enable_cross_zone_load_balancing = true
 
 }
-
