@@ -46,7 +46,7 @@ resource "aws_api_gateway_vpc_link" "techchallenge_vpc_link" {
 resource "aws_vpc_endpoint" "techchallenge_vpc_endpoint" {
   private_dns_enabled = false
   security_group_ids  = [aws_security_group.eks_security_group.id]
-  service_name        = "com.amazonaws.${data.aws_region.current.name}.execute-api"
+  service_name        = "com.amazonaws.${var.aws_region}.execute-api"
   subnet_ids          = [
     aws_subnet.techchallenge_private_subnet_1.id,
     aws_subnet.techchallenge_private_subnet_2.id
