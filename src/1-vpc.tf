@@ -2,7 +2,8 @@
 resource "aws_vpc" "techchallenge_vpc" {
   cidr_block       = "10.0.0.0/16"
   instance_tenancy = "default"
-
+  enable_dns_support = true
+  enable_dns_hostnames = true
   tags = {
     Name = "${var.cluster_name}-vpc"
   }
@@ -44,7 +45,7 @@ resource "aws_api_gateway_vpc_link" "techchallenge_vpc_link" {
 
 #VPC Endpoint
 resource "aws_vpc_endpoint" "techchallenge_vpc_endpoint" {
-  private_dns_enabled = false
+  private_dns_enabled = true
   security_group_ids  = [aws_security_group.eks_security_group.id]
   service_name        = "com.amazonaws.${var.aws_region}.execute-api"
   subnet_ids          = [
