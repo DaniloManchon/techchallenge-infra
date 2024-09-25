@@ -3,5 +3,5 @@ controller:
     internal:
       enabled: true
       annotations: 
-        service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
-        ingressclass.kubernetes.io/is-default-class: "true"
+        service.beta.kubernetes.io/aws-load-balancer-type: nlb
+        ingressclass.kubernetes.io/is-default-class: true
