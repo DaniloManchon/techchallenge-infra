@@ -22,6 +22,8 @@ resource "helm_release" "ingress" {
   create_namespace = true
 
   values = ["${file("${path.module}/helm/values-nginx.yaml")}"]
+
+  depends_on = [aws_eks_cluster.techchallenge_cluster]
 }
 
 resource "helm_release" "mongodb" {
