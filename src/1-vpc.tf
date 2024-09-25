@@ -36,19 +36,19 @@ resource "aws_security_group" "eks_security_group" {
   }
 }
 
-# data "aws_lb" "techchallenge_ingress_lb" {
-#   tags = {
-#     "kubernetes.io/service-name" = "ingress-nginx/ingress-nginx-controller"
-#     }
-# }
+data "aws_lb" "techchallenge_ingress_lb" {
+  tags = {
+    "kubernetes.io/service-name" = "ingress-nginx/ingress-nginx-controller"
+    }
+}
 
-# #VPC Link
-# resource "aws_api_gateway_vpc_link" "techchallenge_vpc_link" {
-#   name        = "${var.cluster_name}-vpc-link"
-#   target_arns = [data.aws_lb.techchallenge_ingress_lb.arn]
+#VPC Link
+resource "aws_api_gateway_vpc_link" "techchallenge_vpc_link" {
+  name        = "${var.cluster_name}-vpc-link"
+  target_arns = [data.aws_lb.techchallenge_ingress_lb.arn]
 
-#   depends_on = [ helm_release.ingress ]
-# }
+  depends_on = [ helm_release.ingress ]
+}
 
 #VPC Endpoint
 resource "aws_vpc_endpoint" "techchallenge_vpc_endpoint" {
