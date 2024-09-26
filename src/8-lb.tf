@@ -10,3 +10,15 @@
 #   enable_cross_zone_load_balancing = true
 
 # }
+
+resource "time_sleep" "wait_nlb_creation" {
+  create_duration = "5m"
+  depends_on      = [helm_release.ingress]
+}
+
+data "aws_lb" "techchallenge_ingress_lb" {
+  tags = {
+    "kubernetes.io/service-name" = "ingress-nginx/ingress-nginx-controller"
+  }
+  depends_on = [time_sleep.wait_nlb_creation]
+}

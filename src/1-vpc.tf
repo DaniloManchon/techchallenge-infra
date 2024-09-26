@@ -36,13 +36,6 @@ resource "aws_security_group" "eks_security_group" {
   }
 }
 
-data "aws_lb" "techchallenge_ingress_lb" {
-  tags = {
-    "kubernetes.io/service-name" = "ingress-nginx/ingress-nginx-controller"
-  }
-  depends_on = [time_sleep.wait_nlb_creation]
-}
-
 #VPC Link
 resource "aws_api_gateway_vpc_link" "techchallenge_vpc_link" {
   name        = "${var.cluster_name}-vpc-link"
