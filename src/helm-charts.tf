@@ -24,13 +24,13 @@ resource "helm_release" "ingress" {
   values = ["${file("${path.module}/helm/values-nginx.yaml")}"]
 }
 
-resource "helm_release" "mongodb" {
-  name             = "mongodb"
-  repository       = "https://charts.bitnami.com/bitnami"
-  chart            = "mongodb"
-  namespace        = "mongodb"
-  create_namespace = true
-  version          = "15.6.24"
+# resource "helm_release" "mongodb" {
+#   name             = "mongodb"
+#   repository       = "https://charts.bitnami.com/bitnami"
+#   chart            = "mongodb"
+#   namespace        = "mongodb"
+#   create_namespace = true
+#   version          = "15.6.24"
 
-  values = ["${file("${path.module}/helm/values-mongo.yaml")}"]
-}
+#   values = ["${file("${path.module}/helm/values-mongo.yaml")}"]
+# }
