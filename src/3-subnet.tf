@@ -4,9 +4,6 @@ resource "aws_subnet" "public_subnet_1" {
   cidr_block        = "10.0.1.0/24"
   availability_zone = var.availability_zones[0]
 
-  # map_public_ip_on_launch = true 
-  # Prevent errors due to destroy process
-
   tags = {
     Name = "${var.cluster_name}-public_subnet_1"
     Tier = "Public"

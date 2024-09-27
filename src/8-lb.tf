@@ -12,7 +12,7 @@
 # }
 
 resource "time_sleep" "wait_nlb_creation" {
-  create_duration = "5m"
+  create_duration = var.timer_value
   depends_on      = [helm_release.ingress]
 }
 

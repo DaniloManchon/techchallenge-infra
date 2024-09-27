@@ -34,3 +34,9 @@ variable "ami_type" {
   type        = string
   default     = "AL2_x86_64"
 }
+
+variable "timer_value" {
+  description = "value for wait ingress NLB creation"
+  type        = string
+  default     = "5m"
+}
