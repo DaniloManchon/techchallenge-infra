@@ -1,11 +1,11 @@
 # EKS Node Group
-resource "aws_eks_node_group" "techchallenge_node_group" {
-  cluster_name    = aws_eks_cluster.techchallenge_cluster.name
+resource "aws_eks_node_group" "node_group" {
+  cluster_name    = aws_eks_cluster.cluster.name
   node_group_name = "${var.cluster_name}-ng"
-  node_role_arn   = aws_eks_cluster.techchallenge_cluster.role_arn
+  node_role_arn   = aws_eks_cluster.cluster.role_arn
   subnet_ids = [
-    aws_subnet.techchallenge_private_subnet_1.id,
-    aws_subnet.techchallenge_private_subnet_2.id
+    aws_subnet.private_subnet_1.id,
+    aws_subnet.private_subnet_2.id
   ]
 
   scaling_config {
@@ -19,16 +19,9 @@ resource "aws_eks_node_group" "techchallenge_node_group" {
   }
 
   instance_types = [var.instance_type]
-  #   disk_size      = 20
+  ami_type       = var.ami_type
 
-  # remote_access {
-  #   ec2_ssh_key = var.ssh_key_name
-  #   # source_security_group_ids = [aws_security_group.techchallenge_sg.id]
-  # }
-
-  ami_type = var.ami_type
-
-  depends_on = [aws_eks_cluster.techchallenge_cluster]
+  depends_on = [aws_eks_cluster.cluster]
 
   labels = {}
 

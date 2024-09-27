@@ -3,8 +3,8 @@
 #   name               = "${var.cluster_name}-lb"
 #   load_balancer_type = "network"
 #   subnets = [
-#     aws_subnet.techchallenge_public_subnet_1.id,
-#     aws_subnet.techchallenge_public_subnet_2.id
+#     aws_subnet.public_subnet_1.id,
+#     aws_subnet.public_subnet_2.id
 #   ]
 
 #   enable_cross_zone_load_balancing = true
@@ -16,7 +16,7 @@ resource "time_sleep" "wait_nlb_creation" {
   depends_on      = [helm_release.ingress]
 }
 
-data "aws_lb" "techchallenge_ingress_lb" {
+data "aws_lb" "ingress_lb" {
   tags = {
     "kubernetes.io/service-name" = "ingress-nginx/ingress-nginx-controller"
   }
