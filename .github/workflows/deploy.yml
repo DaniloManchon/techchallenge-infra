@@ -41,5 +41,3 @@ jobs:
       - name: apply
         run: terraform apply -auto-approve
         working-directory: './src/'
-
-      - run: echo ${{ steps.plan.outputs.stdout }}
