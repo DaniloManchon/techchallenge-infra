@@ -1,17 +1,17 @@
-## VPC
-#resource "aws_vpc" "vpc" {
-#  cidr_block           = "10.0.0.0/16"
-#  instance_tenancy     = "default"
-#  enable_dns_support   = true
-#  enable_dns_hostnames = true
-#  tags = {
-#    Name = "${var.cluster_name}-vpc"
-#  }
-#
-#  lifecycle {
-#    prevent_destroy = false
-#  }
-#}
+# VPC
+resource "aws_vpc" "vpc" {
+  cidr_block           = "10.0.0.0/16"
+  instance_tenancy     = "default"
+  enable_dns_support   = true
+  enable_dns_hostnames = true
+  tags = {
+    Name = "${var.cluster_name}-vpc"
+  }
+
+  lifecycle {
+    prevent_destroy = false
+  }
+}
 #
 ##VPC Security Group
 #resource "aws_security_group" "eks_security_group" {
