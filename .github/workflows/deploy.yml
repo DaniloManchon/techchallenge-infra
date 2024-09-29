@@ -28,19 +28,19 @@ jobs:
 
       - name: init
         run: terraform init
-        working-directory: './'
+        working-directory: './src/'
 
       - name: validate
         run: terraform validate
-        working-directory: './'
+        working-directory: './src/'
 
       - name: plan
         run: terraform plan
-        working-directory: './'
+        working-directory: './src/'
 
       - name: apply
         run: terraform apply -auto-approve
-        working-directory: './'
+        working-directory: './src/'
 
       - run: echo ${{ steps.plan.outputs.stdout }}
 
