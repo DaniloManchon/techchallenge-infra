@@ -20,6 +20,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-session-token: ${{ env.AWS_SESSION_TOKEN }}
           aws-region: ${{ vars.AWS_REGION }}
+          role-to-assume: arn:aws:iam::975748149223:role/LabRole
 
       - name: set up terraform
         uses: hashicorp/setup-terraform@v2
