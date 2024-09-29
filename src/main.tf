@@ -5,8 +5,6 @@ terraform {
       version = "~> 5.66.0"
     }
   }
-
-  required_version = "~> 1.9.5"
 }
 
 provider "helm" {
