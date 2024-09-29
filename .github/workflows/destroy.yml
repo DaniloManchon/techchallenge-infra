@@ -28,5 +28,5 @@ jobs:
         working-directory: './src/'
 
       - name: Destroy
-        run: terraform destroy -auto-approve
+        run: terraform destroy -state="terraform.tfstate" -auto-approve
         working-directory: './src/'
