@@ -24,6 +24,7 @@ resource "aws_api_gateway_resource" "token_resource" {
 
 # Recurso opcional /token-generator/{cpf}
 resource "aws_api_gateway_resource" "token_resource_with_cpf" {
+  count        = 0
   rest_api_id  = aws_api_gateway_rest_api.token_api.id
   parent_id    = aws_api_gateway_resource.token_resource.id
   path_part    = "{cpf}"
@@ -39,6 +40,7 @@ resource "aws_api_gateway_method" "token_method" {
 
 # Método GET para /token-generator/{cpf}, condicionalmente
 resource "aws_api_gateway_method" "token_method_with_cpf" {
+  count         = 0
   rest_api_id   = aws_api_gateway_rest_api.token_api.id
   resource_id   = aws_api_gateway_resource.token_resource_with_cpf[0].id
   http_method   = "GET"
