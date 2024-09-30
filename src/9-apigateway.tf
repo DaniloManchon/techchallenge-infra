@@ -58,18 +58,6 @@ resource "aws_api_gateway_method" "token_method_with_cpf" {
   }
 }
 
-# Integração com Lambda para /token-generator
-resource "aws_api_gateway_integration" "token_integration" {
-  rest_api_id             = aws_api_gateway_rest_api.token_api.id
-  resource_id             = aws_api_gateway_resource.token_resource.id
-  http_method             = aws_api_gateway_method.token_method.http_method
-  integration_http_method = "POST"
-  type                    = "AWS_PROXY"
-  uri                     = "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:975748149223:function:postech-serverless/invocations"
-
-  # Se necessário, adicione outros parâmetros como passthrough_behavior, content_type, etc.
-}
-
 # Integração com Lambda para /token-generator/{cpf}, condicionalmente
 resource "aws_api_gateway_integration" "token_integration_with_cpf" {
   rest_api_id             = aws_api_gateway_rest_api.token_api.id
@@ -80,10 +68,35 @@ resource "aws_api_gateway_integration" "token_integration_with_cpf" {
   uri                     = "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:975748149223:function:postech-serverless/invocations"
 }
 
+# Criar a resposta do método
+resource "aws_api_gateway_method_response" "token_method_response" {
+  rest_api_id = aws_api_gateway_rest_api.token_api.id
+  resource_id = aws_api_gateway_resource.token_resource_with_cpf.id
+  http_method = aws_api_gateway_method.token_method_with_cpf.http_method
+  status_code = "200"
+
+  response_models = {
+    "application/json" = "Empty"
+  }
+}
+
+# Criar a resposta de integração
+resource "aws_api_gateway_integration_response" "token_integration_response" {
+  rest_api_id = aws_api_gateway_rest_api.token_api.id
+  resource_id = aws_api_gateway_resource.token_resource_with_cpf.id
+  http_method = aws_api_gateway_method.token_method_with_cpf.http_method
+  status_code = aws_api_gateway_method_response.token_method_response.status_code
+
+  response_templates = {
+    "application/json" = jsonencode({
+      message = "Success"
+    })
+  }
+}
+
 # Criação do Deployment da API
 resource "aws_api_gateway_deployment" "token_deployment" {
   depends_on = [
-    aws_api_gateway_integration.token_integration,
     aws_api_gateway_integration.token_integration_with_cpf
   ]
 
