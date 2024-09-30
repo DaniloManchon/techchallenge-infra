@@ -38,7 +38,7 @@ resource "aws_api_gateway_resource" "token_resource_with_cpf" {
 resource "aws_api_gateway_method" "token_method" {
   rest_api_id   = aws_api_gateway_rest_api.token_api.id
   resource_id   = aws_api_gateway_resource.token_resource.id
-  http_method   = "GET"
+  http_method   = "POST"
   authorization = "NONE"
 }
 
@@ -46,7 +46,7 @@ resource "aws_api_gateway_method" "token_method" {
 resource "aws_api_gateway_method" "token_method_with_cpf" {
   rest_api_id   = aws_api_gateway_rest_api.token_api.id
   resource_id   = aws_api_gateway_resource.token_resource_with_cpf.id
-  http_method   = "GET"
+  http_method   = "POST"
   authorization = "NONE"
 }
 
