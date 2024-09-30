@@ -8,6 +8,7 @@ resource "aws_vpc" "vpc" {
     Name = "${var.cluster_name}-vpc"
   }
 
+
   lifecycle {
     prevent_destroy = false
   }
