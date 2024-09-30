@@ -13,6 +13,11 @@ resource "aws_lambda_permission" "allow_api_gateway" {
 resource "aws_api_gateway_rest_api" "token_api" {
   name        = "Pos Tech - API Gateway"
   description = "API gateway para geração de token JWT a partir do CPF"
+
+  # Configuração do endpoint
+  endpoint_configuration {
+    types = ["REGIONAL"]  # Define o tipo de endpoint como regional
+  }
 }
 
 # Recurso principal /token-generator
