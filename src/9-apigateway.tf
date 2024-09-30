@@ -40,6 +40,10 @@ resource "aws_api_gateway_method" "token_method" {
   resource_id   = aws_api_gateway_resource.token_resource.id
   http_method   = "GET"
   authorization = "NONE"
+
+  request_parameters = {
+    "method.request.path.cpf" = false
+  }
 }
 
 # Método GET para /token-generator/{cpf}, condicionalmente
@@ -48,6 +52,10 @@ resource "aws_api_gateway_method" "token_method_with_cpf" {
   resource_id   = aws_api_gateway_resource.token_resource_with_cpf.id
   http_method   = "GET"
   authorization = "NONE"
+
+  request_parameters = {
+    "method.request.path.cpf" = false
+  }
 }
 
 # Integração com Lambda para /token-generator
