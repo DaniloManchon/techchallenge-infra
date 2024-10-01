@@ -2,7 +2,7 @@
 resource "aws_lambda_permission" "allow_api_gateway" {
   statement_id  = "AllowAPIGatewayInvoke"
   action        = "lambda:InvokeFunction"
-  function_name = "postech-serverless"
+  function_name = "postech-token-generator"
   principal     = "apigateway.amazonaws.com"
   source_arn = "${aws_api_gateway_rest_api.token_api.execution_arn}/*/*"
 }
