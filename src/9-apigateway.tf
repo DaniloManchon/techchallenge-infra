@@ -4,7 +4,7 @@ resource "aws_lambda_permission" "allow_api_gateway" {
   action        = "lambda:InvokeFunction"
   function_name = "postech-token-generator"
   principal     = "apigateway.amazonaws.com"
-  source_arn = "${aws_api_gateway_rest_api.token_api.execution_arn}/*/*"
+  source_arn    = "${aws_api_gateway_rest_api.token_api.execution_arn}/*/*"
 }
 
 # Criação da API Gateway REST API
@@ -25,9 +25,9 @@ resource "aws_api_gateway_resource" "token_resource" {
 
 # Recurso opcional /token-generator/{cpf}
 resource "aws_api_gateway_resource" "token_resource_with_cpf" {
-  rest_api_id  = aws_api_gateway_rest_api.token_api.id
-  parent_id    = aws_api_gateway_resource.token_resource.id
-  path_part    = "{cpf}"
+  rest_api_id = aws_api_gateway_rest_api.token_api.id
+  parent_id   = aws_api_gateway_resource.token_resource.id
+  path_part   = "{cpf}"
 }
 
 # Método GET para /token-generator
@@ -57,7 +57,7 @@ resource "aws_api_gateway_integration" "token_integration" {
   http_method             = aws_api_gateway_method.token_method.http_method
   integration_http_method = "POST"
   type                    = "AWS_PROXY"
-  uri                     = "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:975748149223:function:postech-token-generator/invocations"
+  uri                     = "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:${var.aws_account_id}:function:postech-token-generator/invocations"
 }
 
 # Integração com Lambda para /token-generator/{cpf}, condicionalmente
@@ -67,7 +67,7 @@ resource "aws_api_gateway_integration" "token_integration_with_cpf" {
   http_method             = aws_api_gateway_method.token_method_with_cpf.http_method
   integration_http_method = "POST"
   type                    = "AWS_PROXY"
-  uri                     = "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:975748149223:function:postech-token-generator/invocations"
+  uri                     = "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:${var.aws_account_id}:function:postech-token-generator/invocations"
 }
 
 # Criar a resposta do método
