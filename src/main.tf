@@ -5,8 +5,6 @@ terraform {
       version = "~> 5.66.0"
     }
   }
-
-  required_version = "~> 1.9.5"
 }
 
 provider "helm" {
@@ -23,4 +21,14 @@ provider "helm" {
 
 provider "aws" {
   region = var.aws_region
+}
+
+
+# Configure backend - terraform.tfstate
+terraform {
+  backend "s3" {
+    bucket = "tech-challenge-terraform-tfstate"
+    key    = "terraform.tfstate"
+    region = "us-east-1"
+  }
 }
