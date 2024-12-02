@@ -22,6 +22,3 @@ O MongoDB foi escolhido como banco de dados principal para a solução, pelos se
 - Escalabilidade: Caso seja necessario, o MongoDB tem alto poder de escalabilidade e pode ser distribuido em multiplas instancias.
 - Performance: Alem de ser conhecido por sua alta performance em operações de leitura e gravação, ainda é possivel termos indexação em qualquer campo do documento, o que acelera ainda mais a velocidade das consultas, mesmo que sejam complexas.
 - (Bonus) Academico: Nunca havia trabalhado com bancos de dados NoSQL e aproveitei a oportunidade para me desafiar e aprender uma nova tecnologia.
-
-## Próximos Passos
-Finalização da integração do API Gateway com Lambda: Implementar a autenticação de forma funcional.

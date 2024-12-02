@@ -21,7 +21,7 @@ resource "helm_release" "ingress" {
   namespace        = "ingress-nginx"
   create_namespace = true
 
-  values = ["${file("${path.module}/helm/values-nginx.yaml")}"]
+  values = [file("${path.module}/helm/values-nginx.yaml")]
 }
 
 # resource "helm_release" "mongodb" {
